@@ -29,7 +29,7 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
             
             <div className="input-group">
-                <label htmlFor="email">Username</label>
+                <label htmlFor="username">Username</label>
                 <input 
                 onChange={(e) =>{ setUsername(e.target.value) }}
                 type="text" id="username"  name='username' placeholder='Enter username' />
