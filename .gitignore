@@ -1,10 +1,10 @@
 # Dependencies
-Backend/node_modules/
-Frontend/node_modules/
+Server/node_modules/
+Client/node_modules/
 
 # Environment variables
-Backend/.env
-Frontend/.env
+Server/.env
+Client/.env
 
 # Build files
 dist/
