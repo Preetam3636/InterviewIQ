@@ -1,49 +1,71 @@
 # InterviewIQ
 
-AI-powered interview preparation platform built with React, Node.js, Express, MongoDB, and Google Gemini AI.
+**InterviewIQ** is an AI-powered interview preparation platform built with **React.js, Node.js, Express.js, MongoDB, and Google Gemini AI**.
+
+It helps candidates prepare for interviews by analyzing a **job description, candidate self-description, and resume** to generate a personalized AI-powered interview report.
+
+---
 
 ## 🚀 Overview
 
-InterviewIQ helps candidates prepare for job interviews by using a job description, candidate self-description, and resume to generate personalized AI-powered interview reports.
+InterviewIQ allows users to:
+
+* Create an account and log in securely
+* Enter a job description
+* Provide a self-description
+* Upload their resume
+* Generate an AI-powered interview report
+* Store and view previous interview reports
+* View individual interview reports
+* Generate and download a resume/interview PDF
+
+---
 
 ## ✨ Features
 
-- User registration and login
-- JWT-based authentication
-- Protected routes
-- AI-powered interview report generation
-- Job-description-based interview preparation
-- Candidate self-description analysis
-- Resume upload
-- Interview report storage
-- View previous interview reports
-- View individual reports
-- Resume PDF generation and download
+* 🔐 User registration and login
+* 🔑 JWT-based authentication
+* 🛡️ Protected routes
+* 🤖 AI-powered interview report generation
+* 📋 Job-description-based interview preparation
+* 👤 Candidate self-description analysis
+* 📄 Resume upload
+* 💾 Interview report storage
+* 📊 Previous interview reports
+* 🔎 Individual report viewing
+* 📥 Resume PDF generation and download
+
+---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- React.js
-- React Router
-- Axios
-- SCSS
-- Vite
+### Client
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT
+* React.js
+* React Router
+* Axios
+* SCSS
+* Vite
+
+### Server
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
 
 ### AI
-- Google Gemini API
+
+* Google Gemini API
+
+---
 
 ## 📁 Project Structure
 
 ```text
 InterviewIQ/
-├── Backend/
+├── Server/
 │   ├── src/
 │   │   ├── config/
 │   │   ├── controllers/
@@ -54,7 +76,7 @@ InterviewIQ/
 │   ├── package.json
 │   └── server.js
 │
-├── Frontend/
+├── Client/
 │   ├── public/
 │   ├── src/
 │   │   ├── features/
@@ -69,25 +91,29 @@ InterviewIQ/
 └── README.md
 ```
 
+---
+
 ## ⚙️ Installation
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Preetam3636/InterviewIQ.git
 cd InterviewIQ
 ```
 
-### 2. Backend setup
+---
+
+### 2. Server Setup
+
+Navigate to the server directory:
 
 ```bash
-cd Backend
+cd Server
 npm install
 ```
 
-Create a `.env` file inside `Backend/`.
-
-Example:
+Create a `.env` file inside the `Server` directory:
 
 ```env
 PORT=5000
@@ -96,98 +122,232 @@ JWT_SECRET=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Use the exact variable names required by your backend code. Never commit your real `.env` file or API keys.
+> **Important:** Never commit your `.env` file or expose your API keys in the repository.
 
-Start the backend:
+Start the server:
 
 ```bash
 npm start
 ```
 
-If `npm start` is not defined in `package.json`, use:
+If `npm start` is not defined in `package.json`, you can run:
 
 ```bash
 node server.js
 ```
 
-### 3. Frontend setup
+The server will run locally on:
 
-Open another terminal:
+```text
+http://localhost:5000
+```
+
+---
+
+### 3. Client Setup
+
+Open another terminal and navigate to the client directory:
 
 ```bash
-cd Frontend
+cd Client
 npm install
+```
+
+Create a `.env` file inside the `Client` directory if your application uses a frontend API URL:
+
+```env
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Vite will display the local URL, usually:
+Vite will provide the local URL, usually:
 
 ```text
 http://localhost:5173
 ```
 
+---
+
 ## 🔑 Environment Variables
 
-| Variable | Purpose |
-|---|---|
-| `PORT` | Backend server port |
-| `MONGODB_URI` | MongoDB database connection |
-| `JWT_SECRET` | JWT authentication secret |
-| `GEMINI_API_KEY` | Google Gemini API key |
+### Server
 
-If your implementation uses additional environment variables, add them to your local `.env` file.
+| Variable         | Purpose                            |
+| ---------------- | ---------------------------------- |
+| `PORT`           | Backend server port                |
+| `MONGODB_URI`    | MongoDB database connection        |
+| `JWT_SECRET`     | Secret used for JWT authentication |
+| `GEMINI_API_KEY` | Google Gemini API key              |
+
+### Client
+
+| Variable           | Purpose                |
+| ------------------ | ---------------------- |
+| `VITE_BACKEND_URL` | URL of the backend API |
+
+Use the exact variable names required by your implementation.
+
+---
 
 ## 🔄 How It Works
 
 ```text
-Candidate
-   │
-   ├── Job Description
-   ├── Self Description
-   └── Resume
-          │
-          ▼
-     InterviewIQ
-          │
-          ▼
-      Backend API
-          │
-          ▼
-       Gemini AI
-          │
-          ▼
-   Interview Report
-          │
-          ├── Save to MongoDB
-          ├── View Report
-          └── Generate Resume PDF
+                  Candidate
+                      │
+          ┌───────────┼───────────┐
+          │           │           │
+          ▼           ▼           ▼
+    Job Description  Self-      Resume
+                    Description
+          │           │           │
+          └───────────┼───────────┘
+                      ▼
+                 InterviewIQ
+                      │
+                      ▼
+                Client (React)
+                      │
+                      ▼
+                Server (Node.js)
+                      │
+             ┌────────┴────────┐
+             │                 │
+             ▼                 ▼
+         Gemini AI         MongoDB
+             │                 │
+             ▼                 │
+      Interview Report ◄───────┘
+             │
+       ┌─────┴─────┐
+       │           │
+       ▼           ▼
+   View Report   Generate
+                 PDF
 ```
 
-## 🔮 Future Improvements
+---
 
-- Real-time AI mock interviews
-- Voice-based interview practice
-- AI evaluation of candidate answers
-- Interview performance scoring
-- Personalized learning roadmap
-- Difficulty-based technical questions
-- Behavioral interview analysis
-- Resume quality scoring
-- Job-role-specific preparation plans
-- Interview performance analytics
+## 🤖 AI-Powered Interview Analysis
+
+InterviewIQ uses **Google Gemini AI** to analyze the candidate's:
+
+* Job description
+* Resume
+* Self-description
+
+Based on this information, the system generates a personalized interview report containing relevant technical and behavioral interview questions and suggested answers.
+
+---
+
+## 🔐 Authentication
+
+The application uses **JWT (JSON Web Tokens)** for authentication.
+
+The authentication flow is:
+
+```text
+User
+ │
+ ▼
+Login / Register
+ │
+ ▼
+Server
+ │
+ ▼
+JWT Token
+ │
+ ▼
+Authenticated Requests
+ │
+ ▼
+Protected Resources
+```
+
+Protected routes ensure that only authenticated users can access their interview reports and other private resources.
+
+---
+
+## 🗄️ Database
+
+InterviewIQ uses **MongoDB** with **Mongoose** for data storage.
+
+The database stores information such as:
+
+* User accounts
+* Interview reports
+* Technical questions
+* Behavioral questions
+* Report-related data
+
+---
 
 ## 🔒 Security
 
-- `.env` files are excluded using `.gitignore`.
-- JWT is used for authentication.
-- Never expose database credentials, JWT secrets, or AI API keys in source code.
+* `.env` files are excluded using `.gitignore`
+* JWT is used for authentication
+* Database credentials are stored in environment variables
+* AI API keys are stored in environment variables
+* Sensitive credentials should never be committed to GitHub
+
+> **Never upload your real `.env` file to GitHub.**
+
+---
+
+## 🚀 Deployment
+
+The application can be deployed using services such as:
+
+```text
+GitHub
+   │
+   ├── Client
+   │      │
+   │      ▼
+   │    Vercel
+   │
+   └── Server
+          │
+          ▼
+        Render
+          │
+          ├── MongoDB Atlas
+          └── Google Gemini API
+```
+
+For production deployment, make sure to configure the appropriate environment variables on your hosting platforms.
+
+---
+
+## 🔮 Future Improvements
+
+* 🎤 Real-time AI mock interviews
+* 🎙️ Voice-based interview practice
+* 🤖 AI evaluation of candidate answers
+* 📊 Interview performance scoring
+* 📚 Personalized learning roadmap
+* 🎯 Difficulty-based technical questions
+* 🧠 Advanced behavioral interview analysis
+* 📄 Resume quality scoring
+* 💼 Job-role-specific preparation plans
+* 📈 Interview performance analytics
+
+---
 
 ## 👨‍💻 Author
 
 **Preetam Biswas**
 
-GitHub: https://github.com/Preetam3636
+GitHub:
+https://github.com/Preetam3636
+
+---
 
 ## 📄 License
 
-This project is currently intended for educational and portfolio purposes.
+This project is currently intended for **educational and portfolio purposes**.
