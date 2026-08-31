@@ -20,10 +20,87 @@ const Home = () => {
 
     if (loading) {
         return (
-            <main className='loading-screen'>
-                <h1>Loading your interview plan...</h1>
+            <main
+                style={{
+                    minHeight: "100vh",
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "#0d1117",
+                    color: "#fff",
+                }}
+            >
+                <style>{`
+                    @keyframes loading-bars {
+                        0%, 100% {
+                            transform: scaleY(0.4);
+                            opacity: 0.4;
+                        }
+                        50% {
+                            transform: scaleY(1.4);
+                            opacity: 1;
+                        }
+                    }
+
+                    @keyframes loading-dots {
+                        0%, 20% {
+                            opacity: 0;
+                        }
+                        50% {
+                            opacity: 1;
+                        }
+                        100% {
+                            opacity: 0;
+                        }
+                    }
+                `}</style>
+
+                <div style={{ textAlign: "center" }}>
+
+                    {/* Animated bars */}
+                    <div
+                        style={{
+                            height: "45px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "5px",
+                            marginBottom: "18px",
+                        }}
+                    >
+                        {[...Array(7)].map((_, index) => (
+                            <span
+                                key={index}
+                                style={{
+                                    width: "5px",
+                                    height: "24px",
+                                    borderRadius: "5px",
+                                    background: "#ff2d78",
+                                    animation: "loading-bars 1s ease-in-out infinite",
+                                    animationDelay: `${index * 0.12}s`,
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Only text */}
+                    <div
+                        style={{
+                            fontSize: "18px",
+                            fontWeight: "500",
+                            letterSpacing: "1px",
+                        }}
+                    >
+                        Loading
+                        <span style={{ animation: "loading-dots 1.5s infinite" }}>.</span>
+                        <span style={{ animation: "loading-dots 1.5s 0.3s infinite" }}>.</span>
+                        <span style={{ animation: "loading-dots 1.5s 0.6s infinite" }}>.</span>
+                    </div>
+
+                </div>
             </main>
-        )
+        );
     }
 
     return (
@@ -54,7 +131,7 @@ const Home = () => {
                             placeholder={`Paste the full job description here...\ne.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScript, and large-scale system design...'`}
                             maxLength={5000}
                         />
-                        <div className='char-counter'>0 / 5000 chars</div>
+                        <div className='char-counter'>{jobDescription.length} / 5000 chars</div>
                     </div>
 
                     {/* Vertical Divider */}
